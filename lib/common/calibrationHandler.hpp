@@ -3,13 +3,12 @@
 
 namespace common{
     template <typename Collected_Data>
-    class calibrationHandler_{
+    class calibrationHandler{
         private:
         Collected_Data basis_data[];
         public:
-        calibrationHandler<Collected_Data>(double frequency,Collected_Data[] newBasis);
+        calibrationHandler<Collected_Data>(double frequency);
         ~calibrationHandler() = default;
-
+        
     };
-
 }
