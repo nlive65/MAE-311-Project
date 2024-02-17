@@ -1,13 +1,37 @@
 #include "multiModalLogger.hpp"
-//#include <LiquidCrystal.h>
+
 
 common::multiModalLogger::multiModalLogger(){
     Serial.begin(9600);
-    Serial1.begin(9600); // Change based on Serial for SD card
-    //lcd = LiquidCrystal(1,2,3,4,5,6);
-    //lcd.begin(16,2);
+    lcd.init();
+    lcd.backlight();
 };
 
 
+// template <typename T, typename... Args>
+// void common::multiModalLogger::logHelper(std::ostringstream& oss, const T& first, const Args&... rest){
+//     oss << first;
+//     logHelper(oss,rest...);
+// }
 
+// template<typename T>
+// void common::multiModalLogger::logHelper(std::ostringstream& oss, const T& last){
+//     oss <<last;
+// }
 
+// template<typename... Args>
+// void common::multiModalLogger::log(const Args&... args){
+//     std::ostringstream oss;
+//     logHelper(oss, args...);
+//     String printableStr = oss.str();
+//     Serial.print(printableStr);
+//     //DO LCD_writing
+// }
+
+// template<typename... Args>
+// void common::multiModalLogger::logln(const Args&... args){
+//     std::ostringstream oss;
+//     logHelper(oss,args...);
+//     String printableStr = oss.str();
+//     Serial.println(printableStr);
+// }

@@ -10,5 +10,6 @@ namespace common{
         int getState(){return state;};
         void setState(int newState) {state=newState;};
         void runCalibration();
+        void sensorLoop();
     };
 }
