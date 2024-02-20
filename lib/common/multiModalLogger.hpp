@@ -2,12 +2,13 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <sstream>
+#include "constants.hpp"
 
 //TODO handle SD wrapping over the normal writer since that is data only
 namespace common{
     class multiModalLogger{
         private:
-        LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27,16,2);
+        LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCDAddr,16,2);
         template <typename T, typename... Args>
         void logHelper(std::ostringstream& oss, const T& first, const Args&... rest){
             oss << first;
@@ -27,16 +28,10 @@ namespace common{
             std::ostringstream oss;
             logHelper(oss, args...);
             String printableStr = oss.str().c_str();
-            Serial.print(printableStr);
-            //DO LCD_writing
-        }
-
-        template<typename... Args>
-        void logln(const Args&... args){
-            std::ostringstream oss;
-            logHelper(oss,args...);
-            String printableStr = oss.str().c_str();
             Serial.println(printableStr);
+            lcd.setCursor(0,0);
+            lcd.clear();
+            lcd.print(printableStr); 
         }
 };
 }
