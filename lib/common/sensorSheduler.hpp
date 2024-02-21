@@ -2,6 +2,8 @@
 #include "../EM/EMHandler.hpp"
 #include "../THERM/THERMHandler.hpp"
 #include "voltageDivider.hpp"
+#include <Arduino.h>
+
 namespace common{
     class sensorScheduler{
         private:
@@ -10,7 +12,7 @@ namespace common{
 
         //Add default params here since there is no default constructor
         THERM::THERMHandler tempReader;
-        voltageDivider redundant5v;
+        voltageDivider redundant5v /*= voltageDivider()*/;
         voltageDivider redundant3v;
         public:
         sensorScheduler();

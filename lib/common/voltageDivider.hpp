@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-
+#include <Arduino.h>
 namespace common{
     class voltageDivider{
         private:
@@ -14,6 +14,7 @@ namespace common{
             vRef = vReference;
             resistor1 = resistance1;
             resistor2 = resistance2;
+            pinMode(readPin,INPUT);
         }
         ~voltageDivider() = default;
         double getVoltReading();
