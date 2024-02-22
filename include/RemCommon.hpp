@@ -1,3 +1,4 @@
+#pragma once
 #include "../common/calibrationHandler.hpp"
 #include "../common/constants.hpp"
 #include "../common/multiModalLogger.hpp"

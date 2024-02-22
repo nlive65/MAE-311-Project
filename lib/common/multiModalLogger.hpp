@@ -2,9 +2,9 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <sstream>
-#include "constants.hpp"
-
+#include "../UI/Server.hpp"
 //TODO handle SD wrapping over the normal writer since that is data only
+const uint8_t LCDAddr = 0x27;
 namespace common{
     class multiModalLogger{
         private:
@@ -19,6 +19,7 @@ namespace common{
         void logHelper(std::ostringstream& oss, const T& last){
             oss <<last;
         }
+        UI::Server server;
         public:
         multiModalLogger();
         ~multiModalLogger() = default;
@@ -32,6 +33,7 @@ namespace common{
             lcd.setCursor(0,0);
             lcd.clear();
             lcd.print(printableStr); 
+            server.sendLogMsg(printableStr);
         }
 };
 }

@@ -5,6 +5,7 @@ common::multiModalLogger::multiModalLogger(){
     Serial.begin(9600);
     lcd.init();
     lcd.backlight();
+    this->log("IP ",server.getIP());
 };
 
 
