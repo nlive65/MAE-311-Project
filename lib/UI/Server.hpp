@@ -11,15 +11,15 @@ namespace UI{
         private:
         String header;
         AsyncWebServer server = AsyncWebServer(80);
-        WebSocketsServer webLog = WebSocketsServer(81);
+        AsyncWebSocket webLog = AsyncWebSocket("/log");
+        AsyncWebSocket ghostDist = AsyncWebSocket("/dist");
         IPAddress IP;
-
-        
         public:
         Server();
         ~Server() = default; 
         IPAddress getIP();
-        void runWifiLoop();
         void sendLogMsg(String msg);
+        void sendGhostDist(String msg);
+        void begin_server();
     };
 }

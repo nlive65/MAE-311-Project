@@ -2,13 +2,18 @@
 
 
 common::multiModalLogger::multiModalLogger(){
+    
+};
+
+void common::multiModalLogger::init_logger(){
     Serial.begin(9600);
     lcd.init();
     lcd.backlight();
+    server.begin_server();
     this->log("IP ",server.getIP());
-};
-
-
+    Serial.print("IP ");
+    Serial.println(server.getIP());
+}
 // template <typename T, typename... Args>
 // void common::multiModalLogger::logHelper(std::ostringstream& oss, const T& first, const Args&... rest){
 //     oss << first;
