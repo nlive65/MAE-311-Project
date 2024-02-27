@@ -14,7 +14,7 @@ IPAddress UI::Server::getIP(){
 }
 
 void UI::notFound(AsyncWebServerRequest *request){
-    request->send(404,"text/plain","Page Not found");
+    request->send(404,"text/plain","Ghost has taken Webpage");
 }
 
 void UI::Server::sendLogMsg(String msg){
@@ -68,11 +68,11 @@ void UI::Server::begin_server(){
         //Might ad things here :P   
     });
 
-    ghostDist.onEvent([](AsyncWebSocket *socketServer, AsyncWebSocketClient *client, AwsEventType type,void *arg, size_t len){
+    ghostDist.onEvent([](AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len){
         //May put things here too ^_^
     });
     server.onNotFound(UI::notFound);
     server.addHandler(&webLog);
-    server.addHandler(&ghostDist);
+    server.addHandler(&ghostDist);  
     server.begin();
 }
