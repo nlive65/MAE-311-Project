@@ -9,11 +9,10 @@ namespace common{
         private:
         int state;
         EM::EMHandler magReader;
-
+        
         //Add default params here since there is no default constructor
-        THERM::THERMHandler tempReader;
-        voltageDivider redundant5v /*= voltageDivider()*/;
-        voltageDivider redundant3v;
+        THERM::THERMHandler tempReader = THERM::THERMHandler(19,4095,1000);
+        voltageDivider redundant3v = voltageDivider(20,4095,1000,1000);
         public:
         sensorScheduler();
         ~sensorScheduler() = default;
@@ -21,6 +20,6 @@ namespace common{
         void setState(int newState) {state=newState;};
         void runCalibration();
         void runDataCollection();   
-        void sensorLoop();
+        void initSensors();
     };
 }

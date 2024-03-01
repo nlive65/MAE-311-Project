@@ -1,13 +1,14 @@
-#include <Arduino.h>
 #include <RemCommon.hpp>
+#include <Arduino.h>
+
+
+common::multiModalLogger logger_;
 
 void setup() {
-  
-  common::multiModalLogger logger_;
-  logger_.log("Hello, world!");
+  logger_.init_logger();
 }
 
 void loop() {
-  
+  logger_.log("Hello ", 15);
+  delay(1000);
 }
-
