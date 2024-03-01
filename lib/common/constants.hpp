@@ -2,7 +2,8 @@
 #pragma once 
 #include <stdint.h>
 #include <Arduino.h>
-//#include "multiModalLogger.hpp"
+#define ADC_RESOLUTION 3.3/4095
+
 namespace common{
     static const int f_sTHERM = 1;
     static const int f_sEM = 4;

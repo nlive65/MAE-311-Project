@@ -18,6 +18,7 @@ void UI::notFound(AsyncWebServerRequest *request){
 }
 
 void UI::Server::sendLogMsg(String msg){
+    Serial.println("sending Message");
     webLog.textAll(msg);
 }
 
@@ -61,7 +62,7 @@ void UI::Server::begin_server(){
             inMsg = request->getParam(UI::CALIBRATE)->value();
             common::calibrateSignal = true;
         }
-        request->send(200,"text/html",index_html);
+        request->send(200,"text/html",UI::index_html);
     });
 
     webLog.onEvent([](AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len){

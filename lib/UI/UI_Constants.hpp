@@ -77,10 +77,10 @@ namespace UI{
     </div>
     <a href="https://github.com/nlive65/MAE-311-Project" style="margin-left: 50%;">Github</a>
     <script>
-        var ghostDistanceSocket = new WebSocket('ws://'  + window.location.hostname + ':82/');
+        var ghostDistanceSocket = new WebSocket('ws://'  + window.location.hostname + '/dist');
         var pod = document.getElementById('POD');
         var ghostImg = document.getElementById('Ghost');
-        ghostDistanceSocket.onMessage = function (event){
+        ghostDistanceSocket.onmessage = function (event){
             var msg = event.data;
             ghostImg.style.marginRight = msg + 'px';
         }
@@ -92,11 +92,11 @@ namespace UI{
             alert("High Presence Detected");
         }
         var logMessages = document.getElementById("logMessages");
-        var logSocket = new WebSocket('ws://' + window.location.hostname + ':81');
+        var logSocket = new WebSocket('ws://' + window.location.hostname + '/log');
         logSocket.onopen = function(event){
             console.log("Connected to websocket :3");
         }
-        logSocket.onMessage = function (event){
+        logSocket.onmessage = function (event){
             var message = event.data;
             var newLogEntry = document.createElement('div');
             newLogEntry.textContent = message;
