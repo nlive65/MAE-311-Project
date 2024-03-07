@@ -1,13 +1,16 @@
 #pragma once
 #include <Tlv493d.h>
 #include "EMConstants.hpp"
+#include "../common/calibrationHandler.hpp"
 namespace EM{
-    class EMHandler{
+    class EMHandler : common::calibrationHandler<cartesian>{
         private:
         Tlv493d magneticSensor = Tlv493d();
         public:
-        void init_sensor();
-        cartesian getReading();
-
+        EMHandler(double frequency, int size) : common::calibrationHandler<cartesian>(frequency,size){};
+        ~EMHandler() = default;
+        void initSensor() override;
+        cartesian getReading() override;
+        void calibrate() override{};
     };
 }

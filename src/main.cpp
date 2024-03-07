@@ -3,9 +3,10 @@
 
 
 common::multiModalLogger logger_;
-
+common::sensorScheduler hades;
 void setup() {
   logger_.init_logger();
+  hades.initSensors();
 }
 
 void loop() {

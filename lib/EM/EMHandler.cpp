@@ -1,6 +1,6 @@
 #include "EMHandler.hpp"
 
-void EM::EMHandler::init_sensor(){
+void EM::EMHandler::initSensor(){
     magneticSensor.begin();
 }
 
@@ -11,3 +11,4 @@ EM::cartesian EM::EMHandler::getReading(){
     field.z = magneticSensor.getZ();
     return(field);
 }
+
