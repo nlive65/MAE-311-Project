@@ -2,14 +2,24 @@
 #include <Arduino.h>
 
 
-common::multiModalLogger thoth;
-common::sensorScheduler helsing;
+common::multiModalLogger thoth; //Egyptian God of Writing
+common::sensorScheduler shane; // The doctor who kills Dracula
 void setup() {
   thoth.init_logger();
-  helsing.initSensors();
+  shane.initSensors();
 }
 
 void loop() {
-  thoth.log("Hello ", 15);
-  delay(1000);
+  switch(shane.getState()){
+    case common::INIT:
+    shane.initSensors();
+    shane.setState(common::CALIB);
+    break;
+    case common::CALIB:
+
+    break;
+
+    case common::AQUISITION:
+    break;
+  }
 }

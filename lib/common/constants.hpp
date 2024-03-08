@@ -11,6 +11,6 @@ namespace common{
     static double MAGx_TV = 0;
     static double MAGy_TV = 0;
     static double MAGz_TV = 0;
-    static bool calibrateSignal = 0;
+    static bool calibrateSignal = false;
     //multiModalLogger logger_;
 }

@@ -1,5 +1,6 @@
 #include "sensorSheduler.hpp"
 #include "PodStates.hpp"
+#include "PODStates.hpp"
 
 void common::sensorScheduler::initSensors(){
     magReader.initSensor();
@@ -8,5 +9,5 @@ void common::sensorScheduler::initSensors(){
 }
 
 common::sensorScheduler::sensorScheduler(){
-
+    state = common::INIT;
 }
