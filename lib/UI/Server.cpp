@@ -42,7 +42,6 @@ void UI::Server::begin_server(){
         if(request->hasParam(UI::TEMP_INPUT)){
             inMsg = request->getParam(UI::TEMP_INPUT)->value();
             common::THERM_TV = inMsg.toDouble();
-            Serial.println("made it here");
             //send message to the sensor object 
             //Make offset as global var 
         }

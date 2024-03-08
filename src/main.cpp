@@ -2,14 +2,14 @@
 #include <Arduino.h>
 
 
-common::multiModalLogger logger_;
-common::sensorScheduler hades;
+common::multiModalLogger thoth;
+common::sensorScheduler helsing;
 void setup() {
-  logger_.init_logger();
-  hades.initSensors();
+  thoth.init_logger();
+  helsing.initSensors();
 }
 
 void loop() {
-  logger_.log("Hello ", 15);
+  thoth.log("Hello ", 15);
   delay(1000);
 }
