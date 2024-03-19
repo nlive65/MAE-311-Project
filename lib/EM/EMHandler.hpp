@@ -3,7 +3,7 @@
 #include "EMConstants.hpp"
 #include "../common/calibrationHandler.hpp"
 namespace EM{
-    class EMHandler : common::calibrationHandler<cartesian>{
+    class EMHandler : public common::calibrationHandler<cartesian>{
         private:
         Tlv493d magneticSensor = Tlv493d();
         public:

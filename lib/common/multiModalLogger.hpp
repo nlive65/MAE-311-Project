@@ -3,6 +3,7 @@
 #include <LiquidCrystal_I2C.h>
 #include <sstream>
 #include "../UI/Server.hpp"
+#include "dataPacket.hpp"
 //TODO handle SD wrapping over the normal writer since that is data only
 const uint8_t LCDAddr = 0x27;
 namespace common{
@@ -39,6 +40,14 @@ namespace common{
             String newDist = String(distance);
             server.sendGhostDist(newDist);
             log("Updated Ghost Distance");
+        }
+        
+        
+        void sendData(packet data){
+            String PrintableStr = String(data.time) + "," + String(data.magData.x,3); + "," + String(data.magData.y,3) +"," + String(data.magData.z,3) + "," +String(data.thermData,1) +"," + String(data.voltage,2);
+            Serial.println(PrintableStr);
+            server.sendLogMsg(PrintableStr);
+            Serial1.println(PrintableStr);
         }
         void init_logger();
 };

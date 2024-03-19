@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "calibrationHandler.hpp"
 namespace common{
-    class voltageDivider: calibrationHandler<double>{
+    class voltageDivider:public calibrationHandler<double>{
         public:
         uint8_t readPin;
         double vRef;

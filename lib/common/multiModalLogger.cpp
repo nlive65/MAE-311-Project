@@ -13,6 +13,8 @@ void common::multiModalLogger::init_logger(){
     this->log("IP ",server.getIP());
     Serial.print("IP ");
     Serial.println(server.getIP());
+    Serial1.begin(9600);
+    Serial1.println("Time(ms),MagX,MagY,MagZ,Temp(C),Voltage(v)");
 }
 // template <typename T, typename... Args>
 // void common::multiModalLogger::logHelper(std::ostringstream& oss, const T& first, const Args&... rest){

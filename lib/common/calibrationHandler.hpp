@@ -9,6 +9,7 @@ namespace common{
         public:
         std::vector<Collected_Data> basis_data;
         int calibrationDataSize;
+        unsigned long previousMillis = 0;
         double frequency;
         calibrationHandler<Collected_Data>(double freq,int calibSize){
             frequency = freq;
@@ -23,6 +24,10 @@ namespace common{
             Collected_Data data;
             return(data);
         };
+        Collected_Data average;
+        Collected_Data lowerDeviation;
+        Collected_Data upperDeviation;
+        virtual void getChauvenetCriteria(){};
         
     };
 }
