@@ -1,5 +1,6 @@
 #pragma once 
 #include <stdint.h>
+#include <cmath>
 namespace EM{
     const uint8_t EMI2CADDR = 0x5E;
     typedef struct cartesian{
@@ -12,7 +13,9 @@ namespace EM{
         z = a;
         return *this;
     }
+      
+
     }cartesian;
 
-   
+   double magnitude(cartesian vec);
 } 

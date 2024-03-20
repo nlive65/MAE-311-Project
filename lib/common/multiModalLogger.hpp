@@ -36,8 +36,8 @@ namespace common{
             lcd.print(printableStr); 
             server.sendLogMsg(printableStr);
         }
-        void sendUpdatedDistance(int distance){
-            String newDist = String(distance);
+        void sendUpdatedDistance(double distance){
+            String newDist = String(distance,3);
             server.sendGhostDist(newDist);
             log("Updated Ghost Distance");
         }

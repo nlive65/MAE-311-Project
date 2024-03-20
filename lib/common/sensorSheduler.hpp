@@ -24,6 +24,6 @@ namespace common{
         void runCalibration();
         packet runDataCollection();   
         void initSensors();
-        int updateGhostDist();
+        float updateGhostDist(packet data);
     };
 }

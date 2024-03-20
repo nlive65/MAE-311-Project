@@ -28,6 +28,7 @@ namespace common{
         Collected_Data lowerDeviation;
         Collected_Data upperDeviation;
         virtual void getChauvenetCriteria(){};
+        virtual Collected_Data getDeviations(Collected_Data point){return point;};
         
     };
 }

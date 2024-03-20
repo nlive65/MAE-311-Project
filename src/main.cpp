@@ -31,6 +31,7 @@ void loop() {
         common::packet data = shane.runDataCollection();
         if(data.time){
           thoth.sendData(data);
+          thoth.sendUpdatedDistance(shane.updateGhostDist(data));
         }
       }
     break;

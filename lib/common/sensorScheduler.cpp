@@ -3,6 +3,7 @@
 #include "PODStates.hpp"
 #include "dataPacket.hpp"
 #include <Arduino.h>
+#include <algorithm>
 void common::sensorScheduler::initSensors(){
     magReader.initSensor();
     tempReader.initSensor();
@@ -14,6 +15,9 @@ common::sensorScheduler::sensorScheduler(){
     state = common::INIT;
 }
 
+void common::sensorScheduler::runCalibration(){
+    
+}
 common::packet common::sensorScheduler::runDataCollection(){
     currentMillis = millis();
     common::packet data;
@@ -34,4 +38,10 @@ common::packet common::sensorScheduler::runDataCollection(){
     }
 
     return data;
+}
+
+
+float common::sensorScheduler::updateGhostDist(common::packet data){
+    float ghostDist = 1/tempReader.getDeviations(data.thermData) + 1/EM::magnitude(magReader.getDeviations(data.magData));
+    return ghostDist;
 }

@@ -82,7 +82,7 @@ namespace UI{
         var ghostImg = document.getElementById('Ghost');
         ghostDistanceSocket.onmessage = function (event){
             var msg = event.data;
-            ghostImg.style.marginRight = msg + 'px';
+            ghostImg.style.marginRight = msg*700 + 'px';
         }
         var dotLine = document.querySelector('.dot-line');
         var distance = pod.getBoundingClientRect().left - ghostImg.getBoundingClientRect().right;
