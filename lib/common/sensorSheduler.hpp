@@ -15,8 +15,6 @@ namespace common{
         THERM::THERMHandler tempReader = THERM::THERMHandler(19,4095.0,1000,4,30);
         voltageDivider redundant3v = voltageDivider(20,4095.0,1000,1000.0,4,30);
 
-        byte int button = A1;
-        int = buttonState;
         unsigned long currentMillis;
         public:
         sensorScheduler();
