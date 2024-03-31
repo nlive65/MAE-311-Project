@@ -18,7 +18,6 @@ void UI::notFound(AsyncWebServerRequest *request){
 }
 
 void UI::Server::sendLogMsg(String msg){
-    Serial.println("sending Message");
     webLog.textAll(msg);
 }
 

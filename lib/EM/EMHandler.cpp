@@ -5,6 +5,7 @@ void EM::EMHandler::initSensor(){
 }
 
 EM::cartesian EM::EMHandler::getReading(){
+    magneticSensor.updateData();
     EM::cartesian field;
     field.x = magneticSensor.getX();
     field.y = magneticSensor.getY();

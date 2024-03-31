@@ -44,7 +44,7 @@ namespace common{
         
         
         void sendData(packet data){
-            String PrintableStr = String(data.time) + "," + String(data.magData.x,3); + "," + String(data.magData.y,3) +"," + String(data.magData.z,3) + "," +String(data.thermData,1) +"," + String(data.voltage,2);
+            String PrintableStr = data.type + ","  + String(data.time) + "," + String(data.magData.x,3) + "," + String(data.magData.y,3) +"," + String(data.magData.z,3) + "," +String(data.thermData,1) +"," + String(data.voltage,2);
             Serial.println(PrintableStr);
             server.sendLogMsg(PrintableStr);
             Serial1.println(PrintableStr);
