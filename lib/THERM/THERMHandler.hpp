@@ -9,5 +9,6 @@ namespace THERM{
         double getReading() override;
         void initSensor(){common::voltageDivider::initSensor();};
         void calibrate() override{};
+        void getChauvenetCriteria() override;
     };
 }
