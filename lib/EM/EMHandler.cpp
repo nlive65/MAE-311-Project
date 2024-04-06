@@ -10,7 +10,7 @@ EM::cartesian EM::EMHandler::getReading(){
     field.x = 2.02*magneticSensor.getX()+0.679;
     field.y = 3.87*magneticSensor.getY()-0.343;
     field.z = 1.47*magneticSensor.getZ()+0.107;
-    return(field);
+    return(field); 
 }
 
 // void EM::EMHandler::getChauvenetCriteria(){

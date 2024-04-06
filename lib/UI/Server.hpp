@@ -4,6 +4,7 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <WebSocketsServer.h>
+#include "../common/dataPacket.hpp"
 
 namespace UI{
     void notFound(AsyncWebServerRequest *request);
@@ -21,5 +22,6 @@ namespace UI{
         void sendLogMsg(String msg);
         void sendGhostDist(String msg);
         void begin_server();
+        int recordDB(common::packet msg);
     };
 }
