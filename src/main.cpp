@@ -1,5 +1,11 @@
 #include <RemCommon.hpp>
 #include <Arduino.h>
+#include <stdint.h>
+  const int button = A1;
+
+int buttonState;
+unsigned long previousMillis = 0;
+unsigned long currentMillis = 50;
 
 
 common::multiModalLogger thoth; //Egyptian God of Writing
@@ -7,6 +13,8 @@ common::sensorScheduler shane;
 void setup() {
   thoth.init_logger();
   shane.initSensors();
+  pinMode(button, INPUT);
+  buttonState = digitalRead(button);
 }
 
 void loop() {
@@ -23,6 +31,9 @@ void loop() {
 
     case common::ACQUISITION:
       //debounce here
+      if ((millis() - currentMillis) > previousMillis) {
+        previousMillis = currentMillis;
+      }
       if(common::calibrateSignal){
           shane.setState(common::CALIB);
           break;
@@ -43,4 +54,11 @@ void loop() {
 
 void debounce(){
   //When button is pressed, do common::calibrateSignal=true;
+  int val = digitalRead(button);
+  delay (10);
+  int val2 = digitalRead(button);
+  if (val == val2 && val != buttonState && val == LOW) {
+    common::calibrateSignal = true;
+  }
+  buttonState = val;
 }
