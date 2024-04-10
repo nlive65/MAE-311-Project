@@ -41,15 +41,15 @@ common::packet common::sensorScheduler::runDataCollection(){
 
 float common::sensorScheduler::updateGhostDist(common::packet data){
     float ghostDist = 1;
-    if(tempReader.getDeviations(data.thermData) !=0 && EM::magnitude(magReader.getDeviations(data.magData))!=0){
-        ghostDist = 1/tempReader.getDeviations(data.thermData) + 1/EM::magnitude(magReader.getDeviations(data.magData));//tune these params
-    }
-    else if(tempReader.getDeviations(data.thermData) ==0 && EM::magnitude(magReader.getDeviations(data.magData))!=0){
-        ghostDist = 1/EM::magnitude(magReader.getDeviations(data.magData));//tune these params
-    }
-    else{
-        ghostDist = 1/tempReader.getDeviations(data.thermData);
-    }
-    float updatedDist = constrain(ghostDist,0,1);
+    // if(tempReader.getDeviations(data.thermData) !=0 && EM::magnitude(magReader.getDeviations(data.magData))!=0){
+    //     ghostDist = 1/tempReader.getDeviations(data.thermData) + 1/EM::magnitude(magReader.getDeviations(data.magData));//tune these params
+    // }
+    // else if(tempReader.getDeviations(data.thermData) ==0 && EM::magnitude(magReader.getDeviations(data.magData))!=0){
+    //     ghostDist = 1/EM::magnitude(magReader.getDeviations(data.magData));//tune these params
+    // }
+    // else{
+    //     ghostDist = 1/tempReader.getDeviations(data.thermData);
+    // }
+    // float updatedDist = constrain(ghostDist,0,1);
     return ghostDist;
 }

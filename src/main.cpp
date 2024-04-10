@@ -1,13 +1,29 @@
 #include <RemCommon.hpp>
 #include <Arduino.h>
+const int button = A1;
 
+int buttonState;
 
 common::multiModalLogger thoth; //Egyptian God of Writing
 common::sensorScheduler shane; 
 void setup() {
   thoth.init_logger();
   shane.initSensors();
+  pinMode(button,INPUT);
+  buttonState = digitalRead(button);
 }
+
+void debounce(){
+  //When button is pressed, do common::calibrateSignal=true;
+  int val = digitalRead(button);
+  delay (10);
+  int val2 = digitalRead(button);
+  if (val == val2 && val != buttonState && val == LOW) {
+    common::calibrateSignal = true;
+  }
+  buttonState = val; 
+};
+
 
 void loop() {
   switch(shane.getState()){
@@ -18,12 +34,14 @@ void loop() {
     thoth.log("Packet:t,x,y,z,T,v");
     break;
     case common::CALIB:
-    common::calibrateSignal = false;
-    thoth.log("Calibrating...");
-    shane.runCalibration();//Break these into more discrete steps rather than a comprehensive function
+    shane.setState(common::ACQUISITION);
+    // common::calibrateSignal = false;
+    // thoth.log("Calibrating...");
+    // shane.runCalibration();//Break these into more discrete steps rather than a comprehensive function
     break;
     case common::ACQUISITION:
       //debounce here
+      debounce();
       delay(500);
       //thoth.log("State: Acquisition");
       if(common::calibrateSignal){
@@ -44,7 +62,3 @@ void loop() {
   }
 }
 
-void debounce(){
-  //When button is pressed, do common::calibrateSignal=true;
-
-}

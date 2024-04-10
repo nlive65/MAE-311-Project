@@ -8,3 +8,4 @@ double THERM::THERMHandler::getReading() {
 
     double calibCurve = (T+4.07)/0.702;
     return calibCurve;
+}
