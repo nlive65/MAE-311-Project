@@ -44,9 +44,12 @@ namespace common{
         
         
         void sendData(packet data){
-            String PrintableStr = data.type + ","  + String(data.time) + "," + String(data.magData.x,3) + "," + String(data.magData.y,3) +"," + String(data.magData.z,3) + "," +String(data.thermData,1) +"," + String(data.voltage,2);
+            String PrintableStr = data.type + ","  + String(data.time) + "," + String(data.magData.x,3) + "," + String(data.magData.y,3) +"," + String(data.magData.z,3) + "," +String(data.thermData,1);
             Serial.println(PrintableStr);
             server.sendLogMsg(PrintableStr);
+            int response = server.recordDB(data);
+            Serial.print("SQL Response: ");
+            Serial.println(response);
             Serial1.println(PrintableStr);
         }
         void init_logger();
