@@ -4,6 +4,10 @@
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include "../common/constants.hpp"
+#include <HTTPClient.h>
+#include "secret.hpp"
+#include <sstream>
+
 UI::Server::Server(){
     
     
@@ -18,8 +22,8 @@ void UI::notFound(AsyncWebServerRequest *request){
 }
 
 void UI::Server::sendLogMsg(String msg){
-    Serial.println("sending Message");
     webLog.textAll(msg);
+
 }
 
 void UI::Server::sendGhostDist(String msg){
@@ -75,4 +79,26 @@ void UI::Server::begin_server(){
     server.addHandler(&webLog);
     server.addHandler(&ghostDist);  
     server.begin();
+}
+
+int UI::Server::recordDB(common::packet msg){
+    std::stringstream ss;
+    ss << "{";
+    ss << "\"PacketType\":\"" << msg.type <<"\",";
+    ss << "\"MagX\":\"" << msg.magData.x <<"\",";
+    ss << "\"MagY\":\"" << msg.magData.y <<"\",";
+    ss << "\"MagZ\":\"" << msg.magData.z <<"\",";
+    ss << "\"Temp\":\"" << msg.thermData <<"\",";
+    ss << "\"time\":\"" << msg.time <<"\"";
+    ss << "}";
+    std::string jsonData = ss.str();
+    String payload= String(jsonData.c_str());
+    HTTPClient http;
+    http.begin(UI::SQL_API);
+
+    http.addHeader("Content-Type","application/json");
+
+    int response = http.POST(payload);
+
+    return(response);
 }
