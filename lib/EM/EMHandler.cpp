@@ -13,6 +13,8 @@ EM::cartesian EM::EMHandler::getReading(){
     return(field); 
 }
 
+
+
 // void EM::EMHandler::getChauvenetCriteria(){
 //     basis_data.clear();
 //     EM::cartesian sum;

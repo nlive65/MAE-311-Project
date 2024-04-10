@@ -12,5 +12,6 @@ namespace EM{
         void initSensor() override;
         cartesian getReading() override;
         void calibrate() override{};
+        void getChauvenetCriteria() override;
     };
 }
