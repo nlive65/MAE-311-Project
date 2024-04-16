@@ -85,11 +85,11 @@ int UI::Server::recordDB(common::packet msg){
     std::stringstream ss;
     ss << "{";
     ss << "\"PacketType\":\"" << msg.type <<"\",";
-    ss << "\"MagX\":\"" << msg.magData.x <<"\",";
-    ss << "\"MagY\":\"" << msg.magData.y <<"\",";
-    ss << "\"MagZ\":\"" << msg.magData.z <<"\",";
-    ss << "\"Temp\":\"" << msg.thermData <<"\",";
-    ss << "\"time\":\"" << msg.time <<"\"";
+    ss << "\"MagX\":" << msg.magData.x <<",";   
+    ss << "\"MagY\":" << msg.magData.y <<",";
+    ss << "\"MagZ\":" << msg.magData.z <<",";
+    ss << "\"Temp\":" << msg.thermData <<",";
+    ss << "\"time\":" << msg.time <<"";
     ss << "}";
     std::string jsonData = ss.str();
     String payload= String(jsonData.c_str());

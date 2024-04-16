@@ -41,6 +41,17 @@ common::packet common::sensorScheduler::runDataCollection(){
 
 float common::sensorScheduler::updateGhostDist(common::packet data){
     float ghostDist = 1;
+
+    if(tempReader.distance(data.thermData) ==3){
+        state = common::HUNT;
+    }
+    else if(magReader.distance(data.magData) == 3){
+        state = common::HUNT;
+    }
+    else{
+        state =common::ACQUISITION;
+    }
+    // ghostDist = tempReader.getDeviations(data.thermData);
     // if(tempReader.getDeviations(data.thermData) !=0 && EM::magnitude(magReader.getDeviations(data.magData))!=0){
     //     ghostDist = 1/tempReader.getDeviations(data.thermData) + 1/EM::magnitude(magReader.getDeviations(data.magData));//tune these params
     // }

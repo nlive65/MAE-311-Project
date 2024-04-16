@@ -4,6 +4,7 @@
 #include <sstream>
 #include "../UI/Server.hpp"
 #include "dataPacket.hpp"
+
 //TODO handle SD wrapping over the normal writer since that is data only
 const uint8_t LCDAddr = 0x27;
 namespace common{
@@ -34,7 +35,7 @@ namespace common{
             lcd.setCursor(0,0);
             lcd.clear();
             lcd.print(printableStr); 
-            server.sendLogMsg(printableStr);
+            //server.sendLogMsg(printableStr);
         }
         void sendUpdatedDistance(double distance){
             String newDist = String(distance,3);

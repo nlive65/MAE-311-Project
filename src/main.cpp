@@ -9,8 +9,8 @@ common::sensorScheduler shane;
 void setup() {
   thoth.init_logger();
   shane.initSensors();
-  pinMode(button,INPUT);
-  buttonState = digitalRead(button);
+  //pinMode(button,INPUT);
+  //buttonState = digitalRead(button);
 }
 
 void debounce(){
@@ -26,6 +26,7 @@ void debounce(){
 
 
 void loop() {
+  common::packet data;
   switch(shane.getState()){
     case common::INIT:
     thoth.log("Initiating..");
@@ -34,27 +35,36 @@ void loop() {
     thoth.log("Packet:t,x,y,z,T,v");
     break;
     case common::CALIB:
+    common::calibrateSignal = false;
     shane.setState(common::ACQUISITION);
-    // common::calibrateSignal = false;
     // thoth.log("Calibrating...");
     // shane.runCalibration();//Break these into more discrete steps rather than a comprehensive function
     break;
     case common::ACQUISITION:
       //debounce here
-      debounce();
-      delay(500);
-      //thoth.log("State: Acquisition");
+
+      //thoth.log("State: Seeking");
       if(common::calibrateSignal){
           shane.setState(common::CALIB);
+          
           break;
       }
       else{
-        common::packet data = shane.runDataCollection();
+        thoth.log("State: Seeking");
+        data = shane.runDataCollection();
         if(data.time){
           thoth.sendData(data);
-          //thoth.sendUpdatedDistance(shane.updateGhostDist(data));
+          shane.updateGhostDist(data);
         }
       }
+    break;
+    case common::HUNT:
+    thoth.log("State: LOCATED");
+    data = shane.runDataCollection();
+    if(data.time){
+      thoth.sendData(data);
+      shane.updateGhostDist(data);
+    }
     break;
     default:
     shane.setState(common::INIT);
