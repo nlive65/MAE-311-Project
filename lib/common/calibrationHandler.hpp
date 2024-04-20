@@ -5,7 +5,7 @@ namespace common{
     template <typename Collected_Data>
     class calibrationHandler{
         private:
-            //Shouldn't have any of these since this is an interface that is realized by every sensor
+    
         public:
         std::vector<Collected_Data> basis_data;
         int calibrationDataSize;
@@ -16,19 +16,16 @@ namespace common{
             calibrationDataSize = calibSize;
         };
         ~calibrationHandler() = default;
-        bool isCalibrated;
         virtual void initSensor(){};
-        //Make sure this works
-        virtual void calibrate(){};
         virtual Collected_Data getReading(){
             Collected_Data data;
             return(data);
         };
+        bool isCalibrated;
+        virtual void calibrate(){};
+        
         Collected_Data average;
         Collected_Data lowerDeviation;
-        Collected_Data upperDeviation;
-        //virtual void getChauvenetCriteria(){};
-        //virtual Collected_Data getDeviations(Collected_Data point){return point;};
-        
+        Collected_Data upperDeviation;        
     };
 }

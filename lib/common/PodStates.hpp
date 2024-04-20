@@ -6,7 +6,6 @@ namespace common{
  enum POD_STATES{
     INIT =0,
     CALIB = 1,
-    ACQUISITION = 2,
-    HUNT = 3
+    ACQUISITION = 2
  };   
 }

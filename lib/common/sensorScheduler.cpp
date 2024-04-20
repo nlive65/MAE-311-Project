@@ -6,28 +6,22 @@
 void common::sensorScheduler::initSensors(){
     magReader.initSensor();
     tempReader.initSensor();
-    
 }
 
 common::sensorScheduler::sensorScheduler(){
     state = common::INIT;
 }
 
-void common::sensorScheduler::runCalibration(){
-    
-}
+
 common::packet common::sensorScheduler::runDataCollection(){
-    
     currentMillis = millis();
     common::packet data;
     data.type = "";
     if(currentMillis-magReader.previousMillis  > 1000/magReader.frequency){
         magReader.previousMillis = currentMillis;
         data.magData = magReader.getReading();
-        Serial.println(data.magData.y);
         data.time = currentMillis;
         data.type= data.type+ "mag";
-        
     }
     if(currentMillis-tempReader.previousMillis > 1000/tempReader.frequency){
         tempReader.previousMillis = currentMillis;
@@ -39,6 +33,9 @@ common::packet common::sensorScheduler::runDataCollection(){
 }
 
 
+void common::sensorScheduler::runCalibration(){
+    
+}
 float common::sensorScheduler::updateGhostDist(common::packet data){
     float ghostDist = 1;
 
