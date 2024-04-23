@@ -7,20 +7,21 @@
 #include "../common/dataPacket.hpp"
 
 namespace UI{
+    //Definition for the 404 error for the server
     void notFound(AsyncWebServerRequest *request);
     class Server{
         private:
-        String header;
-        AsyncWebServer server = AsyncWebServer(80);
-        AsyncWebSocket webLog = AsyncWebSocket("/log");
-        AsyncWebSocket ghostDist = AsyncWebSocket("/dist");
-        IPAddress IP;
+        String header;//Unused
+        AsyncWebServer server = AsyncWebServer(80);//Creates the web server
+        AsyncWebSocket webLog = AsyncWebSocket("/log");//Creates the websocket for the log
+        AsyncWebSocket ghostDist = AsyncWebSocket("/dist");//Unused
+        IPAddress IP;//IP address of the arduino
         public:
-        Server();
-        ~Server() = default; 
-        IPAddress getIP();
+        Server();//Default constructor
+        ~Server() = default; //Default destructor
+        IPAddress getIP();//definitions of functions that are implemented in the c++ file
         void sendLogMsg(String msg);
-        void sendGhostDist(String msg);
+        void sendGhostDist(String msg);//unused
         void begin_server();
         int recordDB(common::packet msg);
     };

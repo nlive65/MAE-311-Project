@@ -1,4 +1,5 @@
 #pragma once
+//Holds include reference to every needed file in the library
 #include "../common/calibrationHandler.hpp"
 #include "../common/constants.hpp"
 #include "../common/multiModalLogger.hpp"

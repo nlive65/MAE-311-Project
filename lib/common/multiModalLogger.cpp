@@ -1,11 +1,13 @@
 #include "multiModalLogger.hpp"
 
-
+//Constructor 
 common::multiModalLogger::multiModalLogger(){
     
 };
 
+//Function to set up the logger in the void setup function
 void common::multiModalLogger::init_logger(){
+    //Begin Serial, setup the LCD screen, and the SD writer and begin hosting the server
     Serial.begin(9600);
     lcd.init();
     lcd.backlight();

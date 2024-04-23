@@ -1,12 +1,13 @@
 #pragma once
 namespace UI{
-    static const char* ssid = "REM_POD";
-    static const char* wpa = "Ghostly7";
-    static const char* TEMP_INPUT= "temp";
-    static const char* MAGx_INPUT = "magX";
-    static const char* MAGy_INPUT = "magY";
-    static const char* MAGz_INPUT = "magZ";
-    static const char* CALIBRATE = "Recalibrate";
+    static const char* ssid = "REM_POD";//unused
+    static const char* wpa = "Ghostly7";//unused
+    static const char* TEMP_INPUT= "temp";//unused
+    static const char* MAGx_INPUT = "magX";//unused
+    static const char* MAGy_INPUT = "magY";//unused
+    static const char* MAGz_INPUT = "magZ";//unused
+    static const char* CALIBRATE = "Recalibrate";//unused
+    //The html webpage converted into a raw string
     const char index_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
 <head>

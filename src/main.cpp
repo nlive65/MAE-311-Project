@@ -1,18 +1,55 @@
 #include <RemCommon.hpp>
 #include <Arduino.h>
+
+
+common::multiModalLogger thoth; //Creates a log handler (named after Egyptian God of writing)
+common::sensorScheduler shane; //(Named after Internet Ghost Hunter Shane Madej)
+void setup() {
+  //Initialize all components
+  thoth.init_logger();
+  shane.initSensors();
+}
+void loop() {
+  //Create a packet
+  common::packet data;
+  switch(shane.getState()){//Checks the state of the system
+    case common::INIT:
+    //If sensors need to be reinitialized
+    //then initialize the sensors
+    thoth.log("Initiating..");
+    shane.initSensors();
+    shane.setState(common::ACQUISITION); 
+    thoth.log("Packet:t,x,y,z,T,v");
+    break;
+    case common::CALIB:
+    //Debug mode is now unused
+    common::calibrateSignal = false;
+    shane.setState(common::ACQUISITION);
+    break;
+    case common::ACQUISITION:
+    //unused
+      if(common::calibrateSignal){
+          shane.setState(common::CALIB);
+          break;
+      }
+      else{
+        //Collect data and send it
+        thoth.log("State: Seeking");
+        data = shane.runDataCollection();
+        if(data.time){//If any piece of data was collected(don't send blank messages)
+          thoth.sendData(data);
+        }
+      }
+    break;
+    default:
+    //If the system state is invalid change it to initialize
+    shane.setState(common::INIT);
+    break;
+  }
+}
 const int button = A1;
 
 int buttonState;
-
-common::multiModalLogger thoth; //Egyptian God of Writing
-common::sensorScheduler shane; 
-void setup() {
-  thoth.init_logger();
-  shane.initSensors();
-  //pinMode(button,INPUT);
-  //buttonState = digitalRead(button);
-}
-
 void debounce(){
   //When button is pressed, do common::calibrateSignal=true;
   int val = digitalRead(button);
@@ -23,52 +60,4 @@ void debounce(){
   }
   buttonState = val; 
 };
-
-
-void loop() {
-  common::packet data;
-  switch(shane.getState()){
-    case common::INIT:
-    thoth.log("Initiating..");
-    shane.initSensors();
-    shane.setState(common::ACQUISITION); //Switched this to not run calib so we can get data
-    thoth.log("Packet:t,x,y,z,T,v");
-    break;
-    case common::CALIB:
-    common::calibrateSignal = false;
-    shane.setState(common::ACQUISITION);
-    // thoth.log("Calibrating...");
-    // shane.runCalibration();//Break these into more discrete steps rather than a comprehensive function
-    break;
-    case common::ACQUISITION:
-      //debounce here
-
-      //thoth.log("State: Seeking");
-      if(common::calibrateSignal){
-          shane.setState(common::CALIB);
-          
-          break;
-      }
-      else{
-        thoth.log("State: Seeking");
-        data = shane.runDataCollection();
-        if(data.time){
-          thoth.sendData(data);
-          shane.updateGhostDist(data);
-        }
-      }
-    break;
-    case common::HUNT:
-    thoth.log("State: LOCATED");
-    data = shane.runDataCollection();
-    if(data.time){
-      thoth.sendData(data);
-      shane.updateGhostDist(data);
-    }
-    break;
-    default:
-    shane.setState(common::INIT);
-    break;
-  }
-}
 

@@ -5,8 +5,7 @@
 #define ADC_RESOLUTION 3.3/4095
 
 namespace common{
-    static const int f_sTHERM = 1;
-    static const int f_sEM = 4;
+    //Unused
     static double THERM_TV;
     static double MAGx_TV = 0;
     static double MAGy_TV = 0;

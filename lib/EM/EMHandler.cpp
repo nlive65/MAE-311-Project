@@ -1,29 +1,24 @@
 #include "EMHandler.hpp"
 #include "../common/constants.hpp"
 #include <cmath>
+//Sets up the hardware interface by beginning the communication
 void EM::EMHandler::initSensor(){
     magneticSensor.begin();
 }
 
 EM::cartesian EM::EMHandler::getReading(){
+    //Polls the sensor for an update to the data
     magneticSensor.updateData();
+    //Makes a blank field to be filled in by each data piece
     EM::cartesian field;
+    //saves the x  y and z directions and applies the linear calibration  curve
     field.x = 2.02*magneticSensor.getX()+0.679;
     field.y = 3.87*magneticSensor.getY()-0.343;
     field.z = 1.47*magneticSensor.getZ()+0.107;
-    if(field.z > 10000){
-        field.z = 0;
-    }
-    if(field.x > 10000){
-        field.x = 0;
-    }
-    if(field.y > 10000){
-        field.y = 0;
-    }
     return(field); 
 }
 
-
+//Unused
 int EM::EMHandler::distance(EM::cartesian data){
     if(common::MAGx_TV){
         if(abs(common::MAGx_TV - data.x) > 5){
